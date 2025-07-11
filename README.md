@@ -16,7 +16,7 @@ ONE EDU is an interactive learning platform that provides personalized mentorshi
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
 - **UI Components**: shadcn/ui
 - **Backend**: Supabase (Auth + PostgreSQL)
-- **AI**: OpenAI GPT-4o (chat) and Realtime API (voice)
+- **AI**: OpenAI GPT-4o via Vercel AI SDK and the OpenAI Realtime API
 - **Deployment**: Vercel
 - **Package Manager**: pnpm
 
@@ -74,9 +74,10 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 ```
 nextjs-chat-poc/
 ├── app/                    # Next.js app directory
-│   ├── (auth)/            # Authentication pages
+│   ├── auth/              # Authentication pages
 │   │   ├── login/
-│   │   └── signup/
+│   │   ├── sign-up/
+│   │   └── role-selection/
 │   ├── (dashboard)/       # Protected dashboard pages
 │   │   ├── child/
 │   │   │   ├── chat/      # AI mentor chat
@@ -165,11 +166,12 @@ pnpm dlx shadcn@latest add [component-name]
 
 ### `/api/chat`
 
-Handles chat messages with OpenAI GPT-4o
+Handles chat messages with OpenAI GPT-4o using Vercel AI SDK
 
 - Method: POST
 - Body: `{ messages: ChatMessage[], conversationId?: string }`
-- Returns: AI response and updated conversation
+- Returns: Streaming response with AI messages
+- Headers: `X-Conversation-Id` and `X-XP-Earned`
 
 ## Security Considerations
 

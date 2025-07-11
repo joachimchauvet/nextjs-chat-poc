@@ -140,9 +140,33 @@ CREATE POLICY "Children can view own skills" ON skills
     )
   );
 
+-- Skills: Children can insert their own skills
+CREATE POLICY "Children can insert own skills" ON skills
+  FOR INSERT WITH CHECK (
+    child_id IN (
+      SELECT id FROM child_profiles WHERE user_id = auth.uid()
+    )
+  );
+
+-- Skills: Children can update their own skills
+CREATE POLICY "Children can update own skills" ON skills
+  FOR UPDATE USING (
+    child_id IN (
+      SELECT id FROM child_profiles WHERE user_id = auth.uid()
+    )
+  );
+
 -- Badges: Children can only see their own badges
 CREATE POLICY "Children can view own badges" ON badges
   FOR SELECT USING (
+    child_id IN (
+      SELECT id FROM child_profiles WHERE user_id = auth.uid()
+    )
+  );
+
+-- Badges: Children can insert their own badges
+CREATE POLICY "Children can insert own badges" ON badges
+  FOR INSERT WITH CHECK (
     child_id IN (
       SELECT id FROM child_profiles WHERE user_id = auth.uid()
     )
