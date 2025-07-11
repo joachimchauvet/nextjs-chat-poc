@@ -10,6 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { ChatInput } from './chat-input'
 import { MessageBubble } from './message-bubble'
+import { VoiceChatButton } from './voice-chat-button'
 
 interface ChatInterfaceProps {
   childName: string
@@ -41,14 +42,17 @@ export function ChatInterface({ childName }: ChatInterfaceProps) {
     <div className="flex h-[calc(100vh-8rem)] flex-col gap-4">
       <Card className="flex flex-1 flex-col overflow-hidden">
         <div className="border-b p-4">
-          <div className="flex items-center gap-3">
-            <Avatar>
-              <AvatarFallback className="bg-primary text-primary-foreground">A</AvatarFallback>
-            </Avatar>
-            <div>
-              <h2 className="text-lg font-semibold">Astra</h2>
-              <p className="text-sm text-muted-foreground">Your AI Mentor</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Avatar>
+                <AvatarFallback className="bg-primary text-primary-foreground">A</AvatarFallback>
+              </Avatar>
+              <div>
+                <h2 className="text-lg font-semibold">Astra</h2>
+                <p className="text-sm text-muted-foreground">Your AI Mentor</p>
+              </div>
             </div>
+            <VoiceChatButton childName={childName} />
           </div>
         </div>
 
